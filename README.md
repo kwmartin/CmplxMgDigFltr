@@ -1,6 +1,3 @@
-# CmplxMgDigFltr
-Toolbox for designing complex digital filters having equi-ripple and monotonic magnitude passbands.
-
 %   Toolbox for the Design of Complex Filters
 %   Copyright (C) 2020  Kenneth Martin
 
@@ -69,5 +66,4 @@ This type of approach (and others like it) strikes me as a whole new methodology
 Just some thoughts; I do find playing with Matlab (Copyright, 1984-2016, The Mathworks Inc.) and complex
 filters to be an enjoyable passtime; perhaps you'll find this to be true as well.
 
--Ken Martin, originally 2004, then 2016, then 2018, then 2020
-
+-Ken Martin, originally 2004, then 2016, now 2018.
