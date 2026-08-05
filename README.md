@@ -27,7 +27,7 @@ the examples in ./examples are working. Numerical conditioning has been signific
 To see some examples of designing filters, start Matlab (Copyright, 1984-2026, The Mathworks Inc.),
 change directory into ./examples, add ../lib to your path using
 >>path('../lib',path)
-and then either run the file design_examples.m, or run any of the individual exmpl?.m files
+and then either run the individual exmpl?.m files
 
 The programs in ./lib are intended for designing transfer functions for complex filters, both analog and digital.
 The filters can have a single passband, and upper and lower stopbands that need not be symetrical.
