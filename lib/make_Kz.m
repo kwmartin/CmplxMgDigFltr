@@ -34,9 +34,11 @@ pz = zpk(p_2,[],1);
 
 switch type
   case 'elliptic'
-    p1 = polyClass(pz.z{1}, 1);
-    [fev, fodd] = getEvOdPly(p1); % KM 11/17/2019 now using polyClass functions
-    fz = zpk(fev.rts,[],1);
+    % Compute the even part of P(s) directly in transfer-function form.
+    % This avoids the iterative Muller root-finder used by the polyClass path
+    % and matches the robust implementation in KM_ComplexFilterToolbox.
+    fz = (tf(pz) + tf(pz)')/2;
+    fz = zpk(fz);
 
   case 'monotonic'
     N = np;

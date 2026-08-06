@@ -17,7 +17,7 @@ type = 'elliptic'
 
 
 H = design_dig_filt(p,px,ni,wp,ws,as,Ap,type);
-plot_drsps(H, wpHz, 'b', [-300 1]); % Note non-distorted passband is in Hz
+plot_drsps(H, wpHz, 'b', [-400 10]); % Note non-distorted passband is in Hz
 cscdFltr = mkCscdFltrD2(H, wp);
 plotSimCscd(cscdFltr, wpHz, ws, -300, 0, 'b');
 runMcCscd(cscdFltr, wpHz, 1e-5, 0, 100, [-300, 10], 'b');

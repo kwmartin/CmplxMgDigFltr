@@ -229,17 +229,60 @@ function [val]= muller(fun,ply,N,Init,tol,maxIter,imagRoots)
   % polish roots using original function
   if ply.N > 1
       rts = ply.rts;
+      N = ply.N;
+
+      % Estimate the leading coefficient of fun at a point away from roots.
+      % ply.K is now +/-1, so ply.peval(s) is the monic root polynomial.
+      if N >= 2
+          ind1 = floor(N/2);
+          ind2 = ind1 + 1;
+          s_eval = (rts(ind1) + rts(ind2)) / 2;
+      elseif N == 1
+          s_eval = rts(1) * 1.5;
+      else
+          s_eval = 0;
+      end
+      indic = find(abs(rts - s_eval) < 1e-4);
+      while ~isempty(indic)
+          s_eval = s_eval + 0.2j;
+          indic = find(abs(rts - s_eval) < 1e-4);
+      end
+      K_fun = fun(s_eval) / (sign(ply.K) * ply.peval(s_eval));
+
+      % Use the monic residual so the safeguard is not fooled by the
+      % enormous scale of the original polynomial.
+      res0 = max(abs(fun(rts) / K_fun));
+      % Tolerance for declaring convergence to machine precision.
+      updTol = 1e-12 * max(1, max(abs(rts)));
       for i=1:4
         pl1 = poly(rts);
         [p pDer] = plyDer(pl1, rts);
         funRts = fun(rts);
-        rts = rts - funRts./pDer;
+        update = funRts ./ (K_fun * pDer);
+        new_rts = rts - update;
+        new_res = max(abs(fun(new_rts) / K_fun));
+        if new_res < res0 || max(abs(update)) < updTol
+            rts = new_rts;
+            res0 = new_res;
+            if max(abs(update)) < updTol
+                break;
+            end
+        else
+            break;
+        end
       end
       ply.rts = rts;
   end
 
   if isempty(root_) || rtNmb > N
-    disp('The Muller1 procedure was unsuccessful.')
-    table = char(table);  
+    st = dbstack(2);
+    if ~isempty(st)
+        caller = sprintf('%s:%d', st(1).name, st(1).line);
+    else
+        caller = 'toplevel';
+    end
+    fprintf('MULLER_UNSUCCESSFUL: requested N=%d, found %d roots (caller %s)\n', ...
+        N, ply.N, caller);
+    table = char(table);
   end
 end

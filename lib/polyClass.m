@@ -87,9 +87,9 @@ classdef (ConstructOnLoad = true) polyClass < handle
     function rts = cleanRts(obj)
       tol = 1e-5;
       indic = find(abs(obj.rts) > 1e4); % its assuming everything is freq. scaled
-      for i = indic.'
-        obj.K = obj.K*obj.rts(i);
-        obj.rts(i) = [];
+      if ~isempty(indic)
+        obj.K = obj.K * prod(obj.rts(indic));
+        obj.rts(indic) = [];
       end
       obj.rts = cleanRoots(obj.rts, tol);
       obj.rts = obj.rts(:);

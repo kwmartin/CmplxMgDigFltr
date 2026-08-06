@@ -32,6 +32,12 @@ function [z3 p3] = groupZerosD(H, wp)
   z2 = sortArry(@(x) angle(x), z);
   p2 = sortArry(@(x) angle(x), p);
 
+  % if there are fewer finite poles than zeros, pad with poles at the origin
+  % so every zero can be paired into a proper section
+  if length(p2) < length(z2)
+    p2 = [p2; zeros(length(z2) - length(p2), 1)];
+  end
+
   % group zeros to closest poles going from zeros closest to midWp
   i = 1;
   midWp = 2*pi*(wp(1) + wp(2))/2;

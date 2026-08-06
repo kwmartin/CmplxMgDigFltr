@@ -1,9 +1,12 @@
-function [ax1, ax2] = plot_drsps(H,fp,colour,lim)
-%   Replace this function with plot_dam() where lim has only [y1 y2]
+function [ax1, ax2] = plot_drsps(H, varargin)
 %   PLOT_DRSPS(H) is used to plot the stopband and passband magnitude response
 %   of a discrete tranfer function H. fp is the passband freqs. in Hz.
 %   colour might be 'b', 'r', or 'g', as examples. lim specifies
-%   plot the y axis limits: [y1 y2].
+%   plot limits.
+%
+%   Accepts two signatures:
+%     plot_drsps(H, fp, colour, [y1 y2])               -- local style
+%     plot_drsps(H, fp, fs, colour, [x1 x2 y1 y2])     -- KM style
 %
 %   Toolbox for the Design of Complex Filters
 %   Copyright (C) 2018  Kenneth Martin
@@ -22,6 +25,34 @@ function [ax1, ax2] = plot_drsps(H,fp,colour,lim)
 %   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %
 
+    % Parse the two supported signatures.
+    if nargin == 4
+        fp = varargin{1};
+        colour = varargin{2};
+        lim = varargin{3};
+        if length(lim) ~= 2
+            error('The specifications for plotting must be a vector of size 2');
+        end
+        x1 = -0.5;
+        x2 = 0.5;
+        y1 = lim(1);
+        y2 = lim(2);
+    elseif nargin == 5
+        fp = varargin{1};
+        fs = varargin{2};
+        colour = varargin{3};
+        lim = varargin{4};
+        if length(lim) ~= 4
+            error('The KM-style specifications for plotting must be a vector of size 4');
+        end
+        x1 = lim(1);
+        x2 = lim(2);
+        y1 = lim(3);
+        y2 = lim(4);
+    else
+        error('plot_drsps requires 3 or 4 trailing arguments');
+    end
+
     [zd pd kd] = zpkdata(H);
     b = poly(zd{1});
     a = poly(pd{1});
@@ -35,14 +66,6 @@ function [ax1, ax2] = plot_drsps(H,fp,colour,lim)
     fig = figure('Position',[500 300 500 600]);
     ax1 = subplot(2,1,1);
     plot(s./(2*pi),dbH,colour,'LineWidth',1)
-
-    if length(lim) ~= 2
-        error('The specifications for plotting must be a vector of size 2');
-    end
-    x1 = -0.5;
-    x2 = 0.5;
-    y1 = lim(1);
-    y2 = lim(2);
 
     N = length(s);
     n1 = x2n(fp(1));

@@ -19,7 +19,7 @@ plot_drsps(H, wpHz, 'b', [-240 1]); % Note non-distorted passband is in Hz
 cscdFltr = mkCscdFltrD(H, wp);
 plotSimCscd(cscdFltr, wpHz, ws, -240, 0, 'b');
 tic
-runMcCscd(cscdFltr, wpHz, 1e-5, 0, 100, [-240, 10], 'b');
+runMcCscd(cscdFltr, wpHz, 1e-6, 0, 100, [-240, 10], 'b');
 toc
 drawnow;
 cscdHndl = gcf;

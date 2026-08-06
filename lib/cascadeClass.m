@@ -117,11 +117,26 @@ classdef (ConstructOnLoad = true) cascadeClass < handle
     end      
 
     % update and return the overall system
-    function plotGn(obj, wp, minY, maxY)
-      % update system in case anything was changed
+    function plotGn(obj, varargin)
+      % Accept either plotGn(obj, wp, minY, maxY) or
+      % plotGn(obj, wp, ws, minY, maxY).  The latter is the KM-style
+      % signature used by the csc_fltr_* examples.
       obj.sys = getSystem(obj);
-      plot_drsps(obj.sys, wp, 'b', [minY maxY]);
-    end      
+      if nargin == 4
+        wp = varargin{1};
+        minY = varargin{2};
+        maxY = varargin{3};
+        plot_drsps(obj.sys, wp, 'b', [minY maxY]);
+      elseif nargin == 5
+        wp = varargin{1};
+        ws = varargin{2};
+        minY = varargin{3};
+        maxY = varargin{4};
+        plot_drsps(obj.sys, wp, ws, 'b', [-0.5 0.5 minY maxY]);
+      else
+        error('plotGn requires 3 or 4 trailing arguments');
+      end
+    end
 
     function out = sim(obj, xin, delta_f)
       % simulate the possibly frequency shifted cascade filter

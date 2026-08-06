@@ -61,8 +61,8 @@ tol = 1e-14;
 maxIter = 1000;
 
 if Nevn <= 1
-    Evn.rts = [];
-    Evn.K = 0;
+    Eevn.rts = [];
+    Eevn.K = 0;
 else
     val= muller(funEvn,Eevn,Nevn,Init,tol,maxIter);
     Eevn.cleanRts();
