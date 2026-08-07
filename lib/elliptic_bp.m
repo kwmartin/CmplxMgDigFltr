@@ -7,19 +7,20 @@ function [H, E, F, P] = elliptic_bp(ps,wp,ni,e_)
 % w2: upper passband edge
 % e_: passband ripple = sqrt(1 + e_^2)
 %
-%   Toolbox for the Design of Complex Filters
-%   Copyright (C) 2018  Kenneth Martin
-%
+%   Complex Filter Design Programs
+
+%   Copyright (C) 2026  Kenneth Martin
+
 %   This program is free software: you can redistribute it and/or modify
 %   it under the terms of the GNU General Public License as published by
 %   the Free Software Foundation, either version 3 of the License, or
 %   (at your option) any later version.
-%
+
 %   This program is distributed in the hope that it will be useful,
 %   but WITHOUT ANY WARRANTY; without even the implied warranty of
 %   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 %   GNU General Public License for more details.
-%
+
 %   You should have received a copy of the GNU General Public License
 %   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %
@@ -29,14 +30,14 @@ np=length(ps); % number of finite loss poles (including zero)
 % transform loss poles to s-plane and calculate denominator of H(s)
 % which is the numerator of transfer function T(s)
 pz = zpk([],[],1);
-for i = 1:np % Find transformed finite jw axis poles
-    wpp(i) = trnsfrm_wp(ps(i),wp); % wpp(i) is equal to pi^2
-    pp(i) = zpk(tf([1 2*sqrt(wpp(i)) wpp(i)],1));
-    pz = pz* pp(i);
+for i_ = 1:np % Find transformed finite jw axis poles
+    wpp(i_) = trnsfrm_wp(ps(i_),wp); % wpp(i) is equal to pi^2
+    pp(i_) = zpk(tf([1 2*sqrt(wpp(i_)) wpp(i_)],1));
+    pz = pz* pp(i_);
 end
-for i = 1:ni % Find transformed poles at infinity
-    pi(i) = zpk(tf([1 2 1],1));
-    pz = pz*pi(i);
+for i_ = 1:ni % Find transformed poles at infinity
+    pi(i_) = zpk(tf([1 2 1],1));
+    pz = pz*pi(i_);
 end
 
 % fz is even part of pz
@@ -47,9 +48,9 @@ fz = zpk(fz); % Convert back to zero, pole form
 % transform fz back to s plane
 z = fz.z{1,1};
 nz = length(z)/2;
-for i = 1:nz
-    z2(i) = z(2*i - 1)*z(2*i);
-    wf(i) = trnsfrm_yf(z2(i),wp);
+for i_ = 1:nz
+    z2(i_) = z(2*i_ - 1)*z(2*i_);
+    wf(i_) = trnsfrm_yf(z2(i_),wp);
 end
 wf = wf.';
 
@@ -67,9 +68,9 @@ HH_ = zpk(1 + tf(e_^2*k^2*KK_));
 hh_z = HH_.z{1,1};
 n = ni + np;
 k = 1;
-for i = 1:2*n
-    if real(hh_z(i)) < 0
-        we(k) = hh_z(i);
+for i_ = 1:2*n
+    if real(hh_z(i_)) < 0
+        we(k) = hh_z(i_);
         k = k+1;
     end
 end
@@ -81,4 +82,3 @@ H = g*H;
 F = wf.';
 E = we;
 P = ps;
-

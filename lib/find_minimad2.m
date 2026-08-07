@@ -59,7 +59,7 @@ zmin = winit.';
 % commenting out the return does not work as wsz in line 73 is not defined
 %
 % Found time to look into it, and got code working. Commenting out the return improves accuracy by
-% roughly 1e-5 in minimums (i.e. 100dB) which is insignificant, but the number of iterations is only 0
+% roughly 1e-5 in minima (i.e. 100dB) which is insignificant, but the number of iterations is only 0
 % so the time lost is also insignificant. Summary: either way is fine
 
 % zmin.' % just for debug
@@ -70,7 +70,7 @@ for k = 1:np_-1 % Iterate for each minima
     w1 = winit(k);
     w2 = w1 + 1e-5; % Used to calculate estimate of second derivative
     FPrime = 1; % Initialize second derivative
-    for i = 1:25 % Iterate enough times to guarantee convergence, 15 is adequate
+    for i_ = 1:25 % Iterate enough times to guarantee convergence, 15 is adequate
         F = dlogKK_dz2(sys,[w1 w2]); % Find vector of first derivatives at w1
         dA_dw = dAs10_dz(wsz,As,[w1 w2]);
         F1 = F(1) - dA_dw(1);
@@ -98,4 +98,3 @@ if np_<=1 % Look after special case of no moveable loss-poles
 end
 
 a=1; % for debug
-

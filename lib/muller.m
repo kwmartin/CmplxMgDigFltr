@@ -45,7 +45,7 @@ function [val]= muller(fun,ply,N,Init,tol,maxIter,imagRoots)
   %% Based on Algorithm 2.7 from Numerical Analysis, Burden and Faires
   %% and matlabcentral/filexchange code by John Mathews with modifications
   %% by Kenneth Martin
-  
+
   %Step 1
   minDenom = 1e-15;
   maxFun = 1e40;
@@ -100,7 +100,7 @@ function [val]= muller(fun,ply,N,Init,tol,maxIter,imagRoots)
       %if imagRoots && I > 20
       %  p = imag(p)*j;
       %end
-      
+
       if I == 3
         table{1} = 'Muller1''s Method Iterations';
         table{2}='  I       P           f(P)       ';
@@ -108,7 +108,7 @@ function [val]= muller(fun,ply,N,Init,tol,maxIter,imagRoots)
       end
       str = sprintf('%3u:  % 6.6f + %6.6fi % 6.6f + %6.6fi',I,real(p),imag(p),real(fun(p)),imag(fun(p)));
       table{I + 1} = str;
-      
+
       %Step 6
       if abs(h) < tol && abs(dfltfun(p)) < 1e-7
         table = char(table);
@@ -157,7 +157,7 @@ function [val]= muller(fun,ply,N,Init,tol,maxIter,imagRoots)
       if (abs(fun2) > maxFun) % there are probably no more roots
         break;
       end
-  
+
       h1 = p1 - p0;
       h2 = p2 - p1;
 
@@ -175,10 +175,10 @@ function [val]= muller(fun,ply,N,Init,tol,maxIter,imagRoots)
 
     if (rtNmb < N && abs(fun2) > maxFun) % there are probably no more roots
       ply.K = sign(real(fun2) + imag(fun2));
-      display(sprintf('Returning after finding %d roots', rtNmb))
+      fprintf('Returning after finding %d roots', rtNmb)
       break;
     end
-  
+
     if (I < maxIter && ~isnan(root_))
       if imagRoots
         root_ = imag(root_)*j;
@@ -254,7 +254,7 @@ function [val]= muller(fun,ply,N,Init,tol,maxIter,imagRoots)
       res0 = max(abs(fun(rts) / K_fun));
       % Tolerance for declaring convergence to machine precision.
       updTol = 1e-12 * max(1, max(abs(rts)));
-      for i=1:4
+      for i_=1:4
         pl1 = poly(rts);
         [p pDer] = plyDer(pl1, rts);
         funRts = fun(rts);

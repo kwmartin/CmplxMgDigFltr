@@ -17,7 +17,7 @@ ws = [-0.49 -0.049 0.049 0.49];
 as = [70 50 50 70];
 Ap = 0.05; % the passband ripple in dB
 ONE_STP = 0;
-% A positive-pass continuous-time filter with a elliptic pass-band
+% A positive-pass continuous-time filter with an elliptic pass-band
 
 [p_, px_, wp_, ws_] = shiftSpecs(p, px, wp, ws, 0.05);
 % The next few commented lines shows how to do design and return H
@@ -38,5 +38,3 @@ drawnow;
 cscdHndl = gcf;
 % print('../examples/Figures/csc_fltr_1_8_1','-dpdf');
 print('../examples/Figures/csc_fltr_1_8_1','-dpng');
-
-a=1;

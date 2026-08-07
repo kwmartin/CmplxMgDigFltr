@@ -3,18 +3,22 @@ function Kz_ = make_init2Kzd(p,px,ni,wp,type)
 %   Note: z is not the inverse delay operator (e^jwT), rather
 %   z = sqrt((s - j*wp(2))./(s - j*wp(1)))
 %
-%   Toolbox for the Design of Complex Filters
-%   Copyright (C) 2018  Kenneth Martin
-%
+%   Complex Filter Design Programs
+
+%   Copyright (C) 2026  Kenneth Martin
+
 %   This program is free software: you can redistribute it and/or modify
 %   it under the terms of the GNU General Public License as published by
 %   the Free Software Foundation, either version 3 of the License, or
 %   (at your option) any later version.
-%
+
 %   This program is distributed in the hope that it will be useful,
 %   but WITHOUT ANY WARRANTY; without even the implied warranty of
 %   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 %   GNU General Public License for more details.
+
+%   You should have received a copy of the GNU General Public License
+%   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %
 %   In s, H(s)H(-s) = 1 + K(s)K(-s) where K(s) is the characteristic function
 %   We have K(s)K(-s) = e^2 (F(s)F(-s))/(P(s)P(-s)) (e is epsilon)
@@ -26,15 +30,15 @@ np = length(p); % number of finite loss poles (including zero)
 
 % transform movable loss poles to z
 p_ = [];
-for i = 1:np
-    p_(i) = s2zd(j*p(i),wp);
+for i_ = 1:np
+    p_(i_) = s2zd(j*p(i_),wp);
 end
 
 nx = length(px); % number of finite loss poles (including zero)
 
 % transform fixed loss poles to z
-for i = 1:nx
-    p_(np+i) = s2zd(j*px(i),wp);
+for i_ = 1:nx
+    p_(np+i_) = s2zd(j*px(i_),wp);
 end
 
 % add loss poles at 1 in in z which correspond to infinity in s

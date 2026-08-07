@@ -3,19 +3,20 @@ function xout = simBiquad2(A_, B_, C_, D_, xin, delta_f)
 %   cascade filter having cell arrays A_, B_, C_, D_; delta_f is normally 1,
 %   but can be a frequency shift of filters
 %
-%   Toolbox for the Design of Complex Filters
-%   Copyright (C) 2018  Kenneth Martin
-%
+%   Complex Filter Design Programs
+
+%   Copyright (C) 2026  Kenneth Martin
+
 %   This program is free software: you can redistribute it and/or modify
 %   it under the terms of the GNU General Public License as published by
 %   the Free Software Foundation, either version 3 of the License, or
 %   (at your option) any later version.
-%
+
 %   This program is distributed in the hope that it will be useful,
 %   but WITHOUT ANY WARRANTY; without even the implied warranty of
 %   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 %   GNU General Public License for more details.
-%
+
 %   You should have received a copy of the GNU General Public License
 %   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %
@@ -34,13 +35,13 @@ function xout = simBiquad2(A_, B_, C_, D_, xin, delta_f)
     X{k} = zeros(N,1);
     X1{k} = zeros(N,1);
   end
-  for i = 1:npts
-    x_in = xin(i);
+  for i_ = 1:npts
+    x_in = xin(i_);
     for k = 1:nmbSctns
-      x(k, i) = C_{k}*X{k} + D_{k}*x_in;
+      x(k, i_) = C_{k}*X{k} + D_{k}*x_in;
       X1{k} = A_{k}*X{k} + B_{k}*x_in;
       X{k} = X1{k}*eshft;
-      x_in = x(k, i);
+      x_in = x(k, i_);
     end
   end
   xout = x(k,:).';

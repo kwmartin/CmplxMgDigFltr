@@ -4,24 +4,26 @@ function H2 = freq_shiftd(H, delta_f)
 % and is in Hz The scaling is done by shifting the poles and zeros of a
 % zpk system object and then adjust k appropriately
 %
-%   Toolbox for the Design of Complex Filters
-%   Copyright (C) 2018  Kenneth Martin
-%
+%   Complex Filter Design Programs
+
+%   Copyright (C) 2026  Kenneth Martin
+
 %   This program is free software: you can redistribute it and/or modify
 %   it under the terms of the GNU General Public License as published by
 %   the Free Software Foundation, either version 3 of the License, or
 %   (at your option) any later version.
-%
+
 %   This program is distributed in the hope that it will be useful,
 %   but WITHOUT ANY WARRANTY; without even the implied warranty of
 %   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 %   GNU General Public License for more details.
-%
+
 %   You should have received a copy of the GNU General Public License
 %   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %
 
-    warning('off', 'Control:ltiobject:TFComplex');
+    s = warning('off', 'Control:ltiobject:TFComplex');
+    c = onCleanup(@() warning(s));
     warning('off', 'Control:ltiobject:ZPKComplex');
     if imag(delta_f) > 1e-5 delta_f = imag(delta_f); end % assume delta_f is imaginary
     switch class(H)

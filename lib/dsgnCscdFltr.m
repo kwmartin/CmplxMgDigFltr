@@ -5,24 +5,25 @@ function cscdFltr = dsgnCscdFltr(p,px,ni,wp,ws,as,Ap,type)
 % px is a vector containing fixed poles, ni is the number of poles at infinity
 % wp is a vector containing the pass-band edge frequencies, ws is a vector containing
 % the frequencies at which the stop-band attenation is specified; as is the specifications
-% for the the stop-band attenuation in dB; only the differences are material; Ap is the
+% for the stop-band attenuation in dB; only the differences are material; Ap is the
 % specification for the pass-band ripple in dB, type is either "monotonic" or "elliptic"
 % Do design on freq. shifted filter scaled to -+1
 % Returns a cascadeClass object
 %
-%   Toolbox for the Design of Complex Filters
-%   Copyright (C) 2018  Kenneth Martin
-%
+%   Complex Filter Design Programs
+
+%   Copyright (C) 2026  Kenneth Martin
+
 %   This program is free software: you can redistribute it and/or modify
 %   it under the terms of the GNU General Public License as published by
 %   the Free Software Foundation, either version 3 of the License, or
 %   (at your option) any later version.
-%
+
 %   This program is distributed in the hope that it will be useful,
 %   but WITHOUT ANY WARRANTY; without even the implied warranty of
 %   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 %   GNU General Public License for more details.
-%
+
 %   You should have received a copy of the GNU General Public License
 %   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %
@@ -31,4 +32,3 @@ function cscdFltr = dsgnCscdFltr(p,px,ni,wp,ws,as,Ap,type)
     % For a cascade filter of biquads, call mkCscdFltrD()
     % For a cascade filter of first-order functions, call mkCscdFltrD2()
     cscdFltr = mkCscdFltrD2(H, wp);
-    a=1;

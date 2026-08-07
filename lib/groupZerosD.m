@@ -1,5 +1,6 @@
-%   Toolbox for the Design of Complex Filters
-%   Copyright (C) 2016  Kenneth Martin
+%   Complex Filter Design Programs
+
+%   Copyright (C) 2026  Kenneth Martin
 
 %   This program is free software: you can redistribute it and/or modify
 %   it under the terms of the GNU General Public License as published by
@@ -18,7 +19,8 @@ function [z3 p3] = groupZerosD(H, wp)
 % groupZeros() is used to pair the zeros of a discrete-time transfer function with poles
 %
 
-  warning('off', 'Control:ltiobject:TFComplex');
+  s = warning('off', 'Control:ltiobject:TFComplex');
+  c = onCleanup(@() warning(s));
   warning('off', 'Control:ltiobject:ZPKComplex');
 
   tol = 1e-4;
@@ -52,5 +54,3 @@ function [z3 p3] = groupZerosD(H, wp)
 
   % add remaining poles having zeros at infinity
   p3 = [p3 p2];
-
-  a=1;

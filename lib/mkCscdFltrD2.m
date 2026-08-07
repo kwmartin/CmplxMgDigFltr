@@ -28,23 +28,23 @@ function cscdFltr = mkCscdFltrD2(H, wp)
   % Combine consecutive pairs of zeros and poles into zpk() systems
   % and add to cascadeClass() object
 
-  for i=1:nmbSctns
-    sys = zpk(z(i), p(i), 1, 1);
+  for i_=1:nmbSctns
+    sys = zpk(z(i_), p(i_), 1, 1);
     sctn = cscFltrSctnClass(sys);
     sctn.setGain(1,wp);
     cscdFltr.addSctn(sctn);
   end
 
-  for i = nmbSctns+1:length(p) % in case there are fewer poles than zeros
-    sys = zpk([], p(i), 1, 1);
+  for i_ = nmbSctns+1:length(p) % in case there are fewer poles than zeros
+    sys = zpk([], p(i_), 1, 1);
     sctn = cscFltrSctnClass(sys);
     sctn.setGain(1,wp);
     cscdFltr.addSctn(sctn);
     nmbSctns = length(p);
   end
 
-  for i = nmbSctns+1:length(z) % in case there are fewer zeros than poles
-    sys = zpk(z(i), [], 1, 1);
+  for i_ = nmbSctns+1:length(z) % in case there are fewer zeros than poles
+    sys = zpk(z(i_), [], 1, 1);
     sctn = cscFltrSctnClass(sys);
     sctn.setGain(1,wp);
     cscdFltr.addSctn(sctn);
@@ -55,4 +55,3 @@ function cscdFltr = mkCscdFltrD2(H, wp)
   % scale peak gains to be unity (in the l-infinity sense)
 
   cscdFltr.scaleFltr(wp);
-  a=1;

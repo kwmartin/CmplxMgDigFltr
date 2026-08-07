@@ -1,6 +1,6 @@
 % Top level for designing a 9'th order complex digital bandpass filter with 6
 % movable poles, one fixed pole at dc, and 2 fixed poles at -1. The
-% passband is at postive frequencies only between 0.05 and 0.1 Hz.
+% passband is at positive frequencies only between 0.05 and 0.1 Hz.
 
 exmplNm = 'dig_fltr_2_8_1';
 p = 2*pi*[-0.35 -0.3 -0.25 -0.15 -0.1 0.18 0.25 0.35]; % initial guess at moveable finite loss poles
@@ -36,5 +36,3 @@ cscdHndl = gcf;
 print('../examples/Figures/dig_fltr_2_8_1','-dpdf');
 print('../examples/Figures/dig_fltr_2_8_1/dig_fltr_2_8_1_mc','-dpng');
 toc
-
-a=1;

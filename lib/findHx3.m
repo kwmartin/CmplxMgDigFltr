@@ -1,20 +1,24 @@
 function Hx = findHx3(fz,pz, e_)
 %   Hz = findHz3(fz,pz) solves Feldtkeller's equation in the transformed domain
-%   It makes use of the muller algorithm in polyClass to accurately sovle
+%   It makes use of the muller algorithm in polyClass to accurately solve
 %   Feldtkeller's Algorithm
 %
-%   Toolbox for the Design of Complex Filters
-%   Copyright (C) 2018  Kenneth Martin
-%
+%   Complex Filter Design Programs
+
+%   Copyright (C) 2026  Kenneth Martin
+
 %   This program is free software: you can redistribute it and/or modify
 %   it under the terms of the GNU General Public License as published by
 %   the Free Software Foundation, either version 3 of the License, or
 %   (at your option) any later version.
-%
+
 %   This program is distributed in the hope that it will be useful,
 %   but WITHOUT ANY WARRANTY; without even the implied warranty of
 %   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 %   GNU General Public License for more details.
+
+%   You should have received a copy of the GNU General Public License
+%   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %
 %   Ken Martin: 11/24/03
 %   Revised: 10/20/18
@@ -46,5 +50,3 @@ rtph = sqrt(rtsp);
 rtph = rtph(1:2:end-1);
 rtsph = sort([rtph; -rtph]);
 Hx = zpk(rtsph, rtszh, 1);
-
-a = 1;

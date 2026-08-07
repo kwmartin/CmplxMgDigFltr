@@ -17,7 +17,7 @@ ONE_STP = 0;
 [p_, px_, wp_, ws_] = shiftSpecs(p, px, wp, ws, 0.05);
 
 tic
-% A positive-pass continuous-time filter with a elliptic pass-band
+% A positive-pass continuous-time filter with an elliptic pass-band
 cscdFltr1 = dsgnCscdFltr(p_,px_,ni,wp_,ws_,as,Ap,'elliptic');
 H = cscdFltr1.getSystem();
 % if internal object update not needed just use H = cscdFltr1.sys

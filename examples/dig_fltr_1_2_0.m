@@ -1,6 +1,6 @@
 % Top level for designing a 3'rd order complex digital bandpass filter with 7
 % movable poles, 1 fixed poles at -1. The
-% passband is at postive frequencies only between 0.05 and 0.1 Hz with 0.05dB ripple
+% passband is at positive frequencies only between 0.05 and 0.1 Hz with 0.05dB ripple
 
 p = 2*pi*[-0.2 0.25]; % initial guess at moveable finite loss poles
 px = []; % a fixed pole at dc
@@ -18,5 +18,3 @@ plot_drsps(H, wpHz, 'b', [-70 1]); % Note non-distorted passband is in Hz
 cscdFltr = mkCscdFltrD(H, wp);
 plotSimCscd(cscdFltr, wpHz, ws, -70, 0, 'b');
 % print('../examples/Figures/dig_fltr_2_7_1/dig_fltr_2_7_1_mc','-dpng');
-
-a=1;

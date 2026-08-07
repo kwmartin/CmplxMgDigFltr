@@ -1,5 +1,6 @@
-%   Toolbox for the Design of Complex Filters
-%   Copyright (C) 2016  Kenneth Martin
+%   Complex Filter Design Programs
+
+%   Copyright (C) 2026  Kenneth Martin
 
 %   This program is free software: you can redistribute it and/or modify
 %   it under the terms of the GNU General Public License as published by
@@ -18,7 +19,8 @@ function [grps cnjPls cmplxPls] = groupZeros(H)
 % groupZeros() is used to pair the zeros of a continuous time transfer function with poles
 %
 
-  warning('off', 'Control:ltiobject:TFComplex');
+  s = warning('off', 'Control:ltiobject:TFComplex');
+  c = onCleanup(@() warning(s));
   warning('off', 'Control:ltiobject:ZPKComplex');
 
   tol = 1e-4;
@@ -48,8 +50,8 @@ function [grps cnjPls cmplxPls] = groupZeros(H)
   end
 
   % add grps for remaining poles having zeros at infinity
-  for i=1:length(p2)
-    grps{i+nz} = {[], p2(i)};
+  for i_=1:length(p2)
+    grps{i_+nz} = {[], p2(i_)};
   end
 
   % find conjugate zero,pole groups
@@ -60,9 +62,9 @@ function [grps cnjPls cmplxPls] = groupZeros(H)
   i = 1;
   while length(p3) ~=0
     pl = p3(1);
-    for i = 1:length(grps)
-      if grps{i}{2} == pl
-        zr = grps{i}{1};
+    for i_ = 1:length(grps)
+      if grps{i_}{2} == pl
+        zr = grps{i_}{1};
         break;
       end
     end
@@ -79,5 +81,3 @@ function [grps cnjPls cmplxPls] = groupZeros(H)
     end
     i = i+1;
   end
-
-  a=1;

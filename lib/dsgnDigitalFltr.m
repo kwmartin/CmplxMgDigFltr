@@ -3,30 +3,32 @@ function H2 = dsgnDigitalFltr(p,px,ni,wp,ws,as,Ap,type)
 % Design a digital transfer function from specs, p: moveable poles, px: fixed poles,
 % ni: number of fixed poles at infinity, wp: pass-band edge frequencies, ws: stop-band
 % frequencies corresponding to as: stop-band attenuations at ws frequencies, only differences
-% are material, and type: either "montonic" or "ellicptic"
+% are material, and type: either "monotonic" or "elliptic"
 % Do design on freq. shifted filter scaled to -+1, after the design is completed,
 % the transfer function is shifted back to the originally specified frequencies.
-% The transfer function returned is a zpk system object. As of 11/2018 this is 
-% best top level for designing digital transfer fucntions using the bilinear transform.
+% The transfer function returned is a zpk system object. As of 11/2018 this is
+% best top level for designing digital transfer functions using the bilinear transform.
 %
-%   Toolbox for the Design of Complex Filters
-%   Copyright (C) 2018  Kenneth Martin
-%
+%   Complex Filter Design Programs
+
+%   Copyright (C) 2026  Kenneth Martin
+
 %   This program is free software: you can redistribute it and/or modify
 %   it under the terms of the GNU General Public License as published by
 %   the Free Software Foundation, either version 3 of the License, or
 %   (at your option) any later version.
-%
+
 %   This program is distributed in the hope that it will be useful,
 %   but WITHOUT ANY WARRANTY; without even the implied warranty of
 %   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 %   GNU General Public License for more details.
-%
+
 %   You should have received a copy of the GNU General Public License
 %   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %
 
-  warning('off', 'Control:ltiobject:TFComplex');
+  s = warning('off', 'Control:ltiobject:TFComplex');
+  c = onCleanup(@() warning(s));
   warning('off', 'Control:ltiobject:ZPKComplex');
 
   [p, px, wp, ws, as, sclFctr, shftFctr] = nrmlzSpecsD(p, px, wp, ws, as);
@@ -53,4 +55,3 @@ function H2 = dsgnDigitalFltr(p,px,ni,wp,ws,as,Ap,type)
   [p, px, wp, ws, as, H2] = cont2Digital(H1, p, px, wp, ws, as, sclFctr, shftFctr);
   % plot_dam_ph_gd(H2, [-0.5 0.5], 'b');
   % plot_drsps(H2,wp,'r',[-100 1]);
-  a=1;

@@ -1,5 +1,6 @@
-%   Toolbox for the Design of Complex Filters
-%   Copyright (C) 2016  Kenneth Martin
+%   Complex Filter Design Programs
+
+%   Copyright (C) 2026  Kenneth Martin
 
 %   This program is free software: you can redistribute it and/or modify
 %   it under the terms of the GNU General Public License as published by

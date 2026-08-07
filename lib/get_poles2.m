@@ -2,8 +2,9 @@ function [p,np] = get_poles2(sys,px)
 % [p,np] = get_poles2(sys,px) returns the loss poles excluding the fixed
 % loss-poles corresponding to px .
 
-%   Toolbox for the Design of Complex Filters
-%   Copyright (C) 2016  Kenneth Martin
+%   Complex Filter Design Programs
+
+%   Copyright (C) 2026  Kenneth Martin
 
 %   This program is free software: you can redistribute it and/or modify
 %   it under the terms of the GNU General Public License as published by
@@ -32,8 +33,8 @@ np_ = np/2;
 % p_ = p_(logical(indx));
 
 % Delete fixed poles
-for i=1:length(px)
-    p_ = p_(abs(p_ - px(i)) > 1e-7);
+for i_=1:length(px)
+    p_ = p_(abs(p_ - px(i_)) > 1e-7);
 end
 
 p = p_.';

@@ -5,19 +5,20 @@ classdef (ConstructOnLoad = true) polyClass < handle
 %   The root uses Muller with deflation to get close and then finishes with
 %   root polishing using Newton-Raphson.
 %
-%   Toolbox for the Design of Complex Filters
-%   Copyright (C) 2018  Kenneth Martin
-%
+%   Complex Filter Design Programs
+
+%   Copyright (C) 2026  Kenneth Martin
+
 %   This program is free software: you can redistribute it and/or modify
 %   it under the terms of the GNU General Public License as published by
 %   the Free Software Foundation, either version 3 of the License, or
 %   (at your option) any later version.
-%
+
 %   This program is distributed in the hope that it will be useful,
-%   but WITHOUT ANY WARRANTY; without1 even the implied warranty of
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of
 %   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 %   GNU General Public License for more details.
-%
+
 %   You should have received a copy of the GNU General Public License
 %   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %
@@ -78,12 +79,12 @@ classdef (ConstructOnLoad = true) polyClass < handle
       obj.cleanRts();
       obj.N = length(obj.rts);
     end
-    
+
     function obj = deleteRoot(obj, P)
       tol = 1e-6;
       obj.rts(find(abs(obj.rts - P) < tol)) = [];
     end
-    
+
     function rts = cleanRts(obj)
       tol = 1e-5;
       indic = find(abs(obj.rts) > 1e4); % its assuming everything is freq. scaled
@@ -95,7 +96,7 @@ classdef (ConstructOnLoad = true) polyClass < handle
       obj.rts = obj.rts(:);
       rts = obj.rts;
     end
-    
+
     function conjPly = ctranspose(obj)
       conjPly = polyClass([],1);
       conjPly.rts = -obj.rts;

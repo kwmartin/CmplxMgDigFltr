@@ -15,7 +15,7 @@ as = [50 50 50 50];
 Ap = 0.05; % the passband ripple in dB
 px = [];
 ONE_STP = 0;
-% A positive-pass continuous-time filter with a elliptic pass-band
+% A positive-pass continuous-time filter with an elliptic pass-band
 
 [p_, px_, wp_, ws_] = shiftSpecs(p, px, wp, ws, 0.25);
 cscdFltr1 = dsgnCscdFltr(p_,px_,ni,wp_,ws_,as,Ap,'elliptic');
@@ -27,5 +27,3 @@ drawnow;
 cscdHndl = gcf;
 % print('../examples/Figures/csc_fltr_1_8_0','-dpdf');
 print('../examples/Figures/csc_fltr_1_8_0','-dpng');
-
-a=1;

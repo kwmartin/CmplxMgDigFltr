@@ -30,9 +30,9 @@ function cscdFltr = mkCscdFltrD(H, wp)
   % Combine consecutive pairs of zeros and poles into zpk() systems
   % and add to cascadeClass() object
 
-  for i=1:nmbBqds
-    zsctn = [z(2*i - 1) z(2*i)];
-    psctn = [p(2*i - 1) p(2*i)];
+  for i_=1:nmbBqds
+    zsctn = [z(2*i_ - 1) z(2*i_)];
+    psctn = [p(2*i_ - 1) p(2*i_)];
     sys = zpk(zsctn, psctn, 1, 1);
     sctn = cscFltrSctnClass(sys);
     sctn.setGain(1,wp);
@@ -55,4 +55,3 @@ function cscdFltr = mkCscdFltrD(H, wp)
   % scale peak gains to be unity (in the l-infinity sense)
 
   cscdFltr.scaleFltr(wp);
-  a=1;

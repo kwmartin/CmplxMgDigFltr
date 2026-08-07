@@ -1,5 +1,6 @@
-%   Toolbox for the Design of Complex Filters
-%   Copyright (C) 2016  Kenneth Martin
+%   Complex Filter Design Programs
+
+%   Copyright (C) 2026  Kenneth Martin
 
 %   This program is free software: you can redistribute it and/or modify
 %   it under the terms of the GNU General Public License as published by
@@ -21,13 +22,13 @@ function [h] = log_rsps2(sys,s)
 ls = length(s); % Find the number of frequency points
 h = ones(1,ls); % More convenient for loop below
 h = h*log2(k);
-for i = 1:length(z)
-  zs = s - z(i);
+for i_ = 1:length(z)
+  zs = s - z(i_);
   zs(find(zs == 0)) = 10*eps;
   h = h + log2(zs);
 end
-for i = 1:length(p)
-  ps = s - p(i);
+for i_ = 1:length(p)
+  ps = s - p(i_);
   ps(find(ps == 0)) = 10*eps;
   h = h - log2(ps);
 end

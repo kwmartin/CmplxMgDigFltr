@@ -5,5 +5,6 @@ LibDir = fullfile(RootDir, 'lib');
 cd(ExmplDir);
 path(LibDir, path);
 path(ExmplDir, path);
-warning('off', 'Control:ltiobject:ZPKComplex')
+s = warning('off', 'Control:ltiobject:ZPKComplex')
+c = onCleanup(@() warning(s));
 warning('off', 'Control:ltiobject:TFComplex');

@@ -19,19 +19,20 @@ function Kz_ = place_poles(p,px,ni,wp,ws,as,e_,type)
 %   metic symmetry,” IEEE Trans. Circuits and Systems I, vol. 52, pp. 794–
 %   803, April 2005.
 %
-%   Toolbox for the Design of Complex Filters
-%   Copyright (C) 2018  Kenneth Martin
-%
+%   Complex Filter Design Programs
+
+%   Copyright (C) 2026  Kenneth Martin
+
 %   This program is free software: you can redistribute it and/or modify
 %   it under the terms of the GNU General Public License as published by
 %   the Free Software Foundation, either version 3 of the License, or
 %   (at your option) any later version.
-%
+
 %   This program is distributed in the hope that it will be useful,
 %   but WITHOUT ANY WARRANTY; without even the implied warranty of
 %   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 %   GNU General Public License for more details.
-%
+
 %   You should have received a copy of the GNU General Public License
 %   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 %
@@ -51,8 +52,8 @@ ns = length(ws);
 nx=length(px); % number of finite loss poles (including zero)
 
 % check that the fixed poles are different than the movable poles
-for i=1:nx
-    if any(p == px(i))
+for i_=1:nx
+    if any(p == px(i_))
         error('One of the fixed poles has been specified at the same frequency as a moveable pole');
     end
 end
@@ -96,10 +97,10 @@ nrngs = nplim - 1;
 % Construct a structure with an element for each range. Each range should
 % have moveable poles
 k=0;
-for i = 1:nrngs
-    rlim1 = plim(i); % the lower frequency limit
-    rlim2 = plim(i+1); % the upper frequency limit
-    indcs = find((p > plim(i)) & (p < plim(i+1))); % find the indcs of the moveable poles
+for i_ = 1:nrngs
+    rlim1 = plim(i_); % the lower frequency limit
+    rlim2 = plim(i_+1); % the upper frequency limit
+    indcs = find((p > plim(i_)) & (p < plim(i_+1))); % find the indcs of the moveable poles
     nindcs = length(indcs); % the number of moveable poles in the range
     if nindcs ~= 0 % store the indices of the moveable poles in the range
         k = k+1;
@@ -125,9 +126,9 @@ end
 % a column for each range. There is a row for each minima. Each range has ni + 1 minima
 s2 = zeros(np + nrngs, nrngs);
 k = 1;
-for i = 1:nrngs
-    for jj = 1:(rng(i).ni + 1)
-        s2(k,i) = -1;
+for i_ = 1:nrngs
+    for jj = 1:(rng(i_).ni + 1)
+        s2(k,i_) = -1;
         k = k+1;
     end
 end
@@ -139,7 +140,7 @@ end
 X = [p.'; ones(nrngs,1)];
 
 % Adapt the pole positions to equalize the stop-band loss minima
-for i = 1:2000 % repeat enough times to guarantee success 
+for i_ = 1:2000 % repeat enough times to guarantee success
     zmin = find_minima(Kz_,ws,as,wp); % find the minima of the stop-band loss
     zmino = prune_zmin(p, px_, zmin); % get rid of mins between fixed poles
     zmin = zmino;
@@ -165,7 +166,7 @@ for i = 1:2000 % repeat enough times to guarantee success
     end
 
     Y = -find_margin(Kz_,ws,as,wp,e_,zmin);
-   
+
     S = [dlogKK_dp(Kz_,px_,zmin) s2]; % Calculate the sensitivity matrix
     Pmin = 1e-6.*diag(ones(1,length(X)));
     X = (S + Pmin)\(Y); % Calculate the changes in the pole frequencies
@@ -187,10 +188,10 @@ for i = 1:2000 % repeat enough times to guarantee success
     end
     if max(abs(X(1:np))) < 1e-7
         fprintf('Minima Iteration Terminated in %d iters, error: %d\n', ...
-            i, max(abs(X(1:np))));
+            i_, max(abs(X(1:np))));
         break
     end
-    
+
     % max(abs(X(1:np)))
     Kz_ = make_Kz(p,px_,type); % Calculate the new characteristic equation in s'
 end
@@ -214,4 +215,3 @@ end
 % 10*margin
 
 a=1; % a place to stop for debugging
-

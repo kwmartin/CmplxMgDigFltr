@@ -16,7 +16,7 @@ ONE_STP = 0; % treat both stop-bands as a single stop-band
 
 % frequency shift specs so pass band is at positive frequencies
 % from 0.0125 to 0.0375
-[p_, px_, wp_, ws_] = shiftSpecs(p, px, wp, ws, 0.025); 
+[p_, px_, wp_, ws_] = shiftSpecs(p, px, wp, ws, 0.025);
 
 cscdFltr = dsgnCscdFltr(p_,px_,ni,wp_,ws_,as,Ap,'elliptic');
 % plot cascade filter using object function
@@ -31,5 +31,3 @@ toc
 drawnow;
 cscdHndl = gcf;
 print('Figures/csc_fltr_1_2_1_MC','-dpng');
-
-a=1;

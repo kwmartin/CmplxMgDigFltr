@@ -18,5 +18,3 @@ freq_shtf = 0.0;
 tic
 runMcCscd(cscdFltr, wp, 5e-5, freq_shtf, 100, [-160, 2]);
 toc
-
-a=1;
